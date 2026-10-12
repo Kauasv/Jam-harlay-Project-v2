@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Our First Year - Timeline</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'rio-red': '#8c2626',
+                        'paper': '#f4f1ea',
+                        'charcoal': '#2d2d2d',
+                        'vintage-cream': '#eaddcf'
+                    },
+                    fontFamily: {
+                        'playfair': ['"Playfair Display"', 'serif'],
+                        'vibes': ['"Great Vibes"', 'cursive']
+                    },
+                    animation: {
+                        'spin-slow': 'spin 12s linear infinite',
+                        'float': 'floating 4s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 2s infinite ease-in-out',
+                    },
+                    keyframes: {
+                        floating: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
+                            '50%': { opacity: '0.8', transform: 'scale(1.04)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f4f1ea;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+        }
+        .vinyl-grooves {
+            background: repeating-radial-gradient(#111, #111 2px, #222 3px, #222 4px);
+        }
+
+        /* Classes para animação de scroll suave */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Pausa a rotação do vinil mantendo a posição atual */
+        .paused-spin {
+            animation-play-state: paused !important;
+        }
+
+        /* Modal Lightbox Animations */
+        #photo-modal {
+            transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #photo-modal.modal-closed {
+            opacity: 0;
+            pointer-events: none;
+        }
+        #photo-modal.modal-open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        #modal-card {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+        }
+        #photo-modal.modal-closed #modal-card {
+            transform: scale(0.9) translateY(20px);
+            opacity: 0;
+        }
+        #photo-modal.modal-open #modal-card {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="text-charcoal antialiased overflow-x-hidden selection:bg-rio-red selection:text-white">
+
+    <!-- Hero Section -->
+    <header class="relative w-full min-h-[75vh] md:min-h-[85vh] flex flex-col items-center justify-center text-center px-4 py-16 overflow-hidden">
+        <!-- Elementos de luz de fundo -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
+            <div class="absolute -top-[10%] -left-[10%] w-[70vw] md:w-[45vw] h-[70vw] md:h-[45vw] bg-rio-red rounded-full mix-blend-multiply filter blur-[80px] md:blur-[120px] animate-pulse-glow"></div>
+            <div class="absolute top-[40%] -right-[15%] w-[60vw] md:w-[40vw] h-[60vw] md:h-[40vw] bg-vintage-cream rounded-full mix-blend-multiply filter blur-[80px] md:blur-[120px]"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-3xl animate-float">
+            <span class="inline-block text-xs uppercase tracking-[0.3em] text-rio-red/80 font-playfair font-semibold mb-3">Our Love Anthology</span>
+            <h2 class="font-vibes text-5xl md:text-7xl text-rio-red mb-2 tracking-wide drop-shadow-sm">To my love,</h2>
+            <h1 class="font-playfair text-5xl sm:text-6xl md:text-7xl font-bold mb-6 text-charcoal leading-tight">
+                Our First <br><span class="italic font-light">Year</span>
+            </h1>
+            <p class="font-playfair text-base sm:text-lg md:text-xl text-charcoal/80 mb-10 max-w-xl mx-auto px-4 leading-relaxed">
+                A journey across 36 moments, 3 melodies, and 1 film. The beginning of our forever.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 w-full px-6">
+                <a href="#music" class="w-full sm:w-auto px-8 py-3.5 border border-charcoal/70 text-charcoal font-playfair hover:bg-charcoal hover:text-paper active:scale-95 transition-all duration-300 rounded-sm tracking-widest uppercase text-xs text-center shadow-sm">
+                    The Soundtrack
+                </a>
+                <a href="#timeline" class="w-full sm:w-auto px-8 py-3.5 bg-rio-red text-white font-playfair hover:bg-charcoal active:scale-95 transition-all duration-300 rounded-sm tracking-widest uppercase text-xs shadow-lg shadow-rio-red/20 text-center">
+                    Our Timeline
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Music Player Section -->
+    <section id="music" class="py-16 md:py-24 px-4 max-w-5xl mx-auto">
+        <audio id="audio-player"></audio>
+
+        <div class="text-center mb-10 md:mb-14 reveal-on-scroll">
+            <h3 class="font-playfair text-3xl md:text-4xl font-bold mb-2">The Soundtrack</h3>
+            <p class="font-vibes text-2xl md:text-3xl text-rio-red">Songs that tell our story</p>
+        </div>
+
+        <div class="bg-white/70 backdrop-blur-md border border-vintage-cream shadow-2xl rounded-2xl p-5 sm:p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 md:gap-12 relative overflow-hidden reveal-on-scroll">
+            <!-- Vinil -->
+            <div class="relative w-52 h-52 sm:w-64 sm:h-64 md:w-80 md:h-80 flex-shrink-0 flex items-center justify-center">
+                <div class="hidden sm:flex absolute inset-0 bg-vintage-cream rounded-l-lg shadow-inner -left-6 md:-left-8 w-1/2 z-10 border-r border-black/10 items-center justify-center overflow-hidden">
+                   <p class="font-playfair transform -rotate-90 text-charcoal/30 tracking-widest text-3xl md:text-4xl font-bold whitespace-nowrap">VOL. 01</p>
+                </div>
+                <div id="vinyl-disc" class="w-full h-full rounded-full vinyl-grooves shadow-2xl border-4 border-[#0a0a0a] flex items-center justify-center z-0 cursor-pointer animate-spin-slow paused-spin transition-transform duration-500 hover:scale-[1.03]">
+                    <div class="w-1/3 h-1/3 bg-rio-red rounded-full flex items-center justify-center border-2 border-charcoal/20 relative shadow-inner">
+                        <div class="w-3.5 h-3.5 md:w-4 md:h-4 bg-paper rounded-full absolute shadow-sm"></div>
+                        <div class="text-center mt-5 md:mt-6">
+                            <span class="font-vibes text-white text-xs md:text-sm leading-none block select-none">Side A</span>
+                        </div>
+                    </div>
+                    <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-white/10 via-transparent to-white/10 pointer-events-none"></div>
+                </div>
+            </div>
+
+            <!-- Controles e Playlist -->
+            <div class="flex-1 w-full z-20 bg-paper/90 p-5 sm:p-6 md:p-8 rounded-xl border border-charcoal/5 shadow-inner">
+                <div class="flex justify-between items-end mb-6 border-b border-charcoal/15 pb-4">
+                    <div>
+                        <h4 id="current-title" class="font-playfair text-xl md:text-2xl font-bold uppercase tracking-wider text-charcoal">Year One</h4>
+                        <p id="current-artist" class="font-vibes text-lg md:text-xl text-rio-red">The Mixtape</p>
+                    </div>
+                    <span class="font-playfair text-[10px] md:text-xs tracking-widest text-charcoal/50">STEREO</span>
+                </div>
+
+                <!-- Lista de faixas -->
+                <ul class="space-y-2.5 sm:space-y-3 font-playfair mb-6" id="playlist">
+                    <li class="track-item flex justify-between items-center group cursor-pointer p-2.5 rounded-lg transition-all duration-300" 
+                        data-src="Les.mp3" 
+                        data-title="Our First Song" 
+                        data-artist="Artist 1">
+                        <div class="flex items-center gap-3 sm:gap-4 overflow-hidden">
+                            <span class="track-number text-rio-red font-bold text-sm">01</span>
+                            <div class="truncate">
+                                <p class="track-name font-bold text-charcoal text-sm sm:text-base group-hover:text-rio-red transition truncate">Our First Song</p>
+                                <p class="text-[11px] text-charcoal/60 uppercase tracking-wider">Artist 1</p>
+                            </div>
+                        </div>
+                        <span class="text-xs text-rio-red font-semibold opacity-0 group-hover:opacity-100 transition-opacity ml-2 flex-shrink-0">Play</span>
+                    </li>
+
+                    <li class="track-item flex justify-between items-center group cursor-pointer p-2.5 rounded-lg transition-all duration-300" 
+                        data-src="All The Stars.mp3" 
+                        data-title="Daily Sweet Routine" 
+                        data-artist="Artist 2">
+                        <div class="flex items-center gap-3 sm:gap-4 overflow-hidden">
+                            <span class="track-number text-rio-red font-bold text-sm">02</span>
+                            <div class="truncate">
+                                <p class="track-name font-bold text-charcoal text-sm sm:text-base group-hover:text-rio-red transition truncate">Daily Sweet Routine</p>
+                                <p class="text-[11px] text-charcoal/60 uppercase tracking-wider">Artist 2</p>
+                            </div>
+                        </div>
+                        <span class="text-xs text-rio-red font-semibold opacity-0 group-hover:opacity-100 transition-opacity ml-2 flex-shrink-0">Play</span>
+                    </li>
+
+                    <li class="track-item flex justify-between items-center group cursor-pointer p-2.5 rounded-lg transition-all duration-300" 
+                        data-src="Dave - Raindance (feat. Tems).mp3" 
+                        data-title="Always Us" 
+                        data-artist="Artist 3">
+                        <div class="flex items-center gap-3 sm:gap-4 overflow-hidden">
+                            <span class="track-number text-rio-red font-bold text-sm">03</span>
+                            <div class="truncate">
+                                <p class="track-name font-bold text-charcoal text-sm sm:text-base group-hover:text-rio-red transition truncate">Always Us</p>
+                                <p class="text-[11px] text-charcoal/60 uppercase tracking-wider">Artist 3</p>
+                            </div>
+                        </div>
+                        <span class="text-xs text-rio-red font-semibold opacity-0 group-hover:opacity-100 transition-opacity ml-2 flex-shrink-0">Play</span>
+                    </li>
+                </ul>
+
+                <!-- Barra e Controles -->
+                <div class="pt-4 border-t border-charcoal/10">
+                    <div id="progress-container" class="w-full bg-charcoal/10 h-2 rounded-full mb-3 cursor-pointer relative py-1">
+                        <div id="progress-bar" class="bg-rio-red h-2 rounded-full w-0 relative transition-all duration-100">
+                            <div class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-3.5 h-3.5 bg-rio-red rounded-full shadow-md"></div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center font-playfair text-[11px] sm:text-xs text-charcoal/60 mb-5">
+                        <span id="current-time">0:00</span>
+                        <span id="total-duration">-0:00</span>
+                    </div>
+                    <div class="flex justify-center items-center gap-6 sm:gap-8">
+                        <button id="btn-prev" class="text-charcoal hover:text-rio-red active:scale-90 transition p-2" title="Previous">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 20L9 12l10-8v16zM5 19h2V5H5v14z"/></svg>
+                        </button>
+                        <button id="btn-play" class="w-13 h-13 sm:w-14 sm:h-14 p-3 bg-charcoal text-paper rounded-full flex items-center justify-center hover:bg-rio-red active:scale-95 transition-all shadow-xl" title="Play / Pause">
+                            <svg id="icon-play" class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            <svg id="icon-pause" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                        </button>
+                        <button id="btn-next" class="text-charcoal hover:text-rio-red active:scale-90 transition p-2" title="Next">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M5 4l10 8-10 8V4zm14 15h2V5h-2v14z"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section (36 Fotos com Frases em data-caption) -->
+    <section id="timeline" class="py-16 md:py-24 relative bg-[#f8f5f0] border-t border-b border-vintage-cream shadow-[inset_0_0_40px_rgba(0,0,0,0.02)]">
+        <div class="text-center mb-14 md:mb-20 px-4 reveal-on-scroll">
+            <h3 class="font-playfair text-3xl md:text-4xl font-bold mb-2">Our Timeline</h3>
+            <p class="font-vibes text-2xl md:text-3xl text-rio-red">36 fragments of love</p>
+            <p class="text-[11px] uppercase tracking-widest text-charcoal/50 font-playfair mt-1">Toque em qualquer foto para abrir as memórias</p>
+        </div>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 relative">
+            <div class="absolute left-6 md:left-1/2 md:-translate-x-1/2 top-4 bottom-4 w-0.5 bg-charcoal/15 z-0"></div>
+
+            <!-- Chapter 1 -->
+            <div class="relative z-10 flex flex-col md:flex-row justify-between items-center mb-16 md:mb-24 reveal-on-scroll">
+                <div class="w-full md:w-[46%] pl-10 md:pl-0 md:text-right md:pr-10">
+                    <h4 class="font-playfair text-2xl font-bold text-charcoal mb-1">Chapter 1: Butterflies</h4>
+                    <p class="font-vibes text-rio-red text-xl mb-4">Our First Months</p>
+                    <div class="bg-white p-2.5 sm:p-3 shadow-xl border border-charcoal/5 md:rotate-[-1.5deg] transition duration-500 hover:rotate-0 rounded-sm">
+                        <div class="grid grid-cols-3 gap-1.5 sm:gap-2">
+                            <img src="img1.jpeg" alt="Memory 1" data-caption="O dia em que meu mundo começou a girar com você." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img2.jpeg" alt="Memory 2" data-caption="Aquele sorriso tímido que me desarmou por completo." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img3.jpeg" alt="Memory 3" data-caption="O frio na barriga dos nossos primeiros encontros." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img4.jpeg" alt="Memory 4" data-caption="Conversas infinitas que faziam as horas parecerem segundos." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img5.jpeg" alt="Memory 5" data-caption="Quando percebi que ficar perto de você era meu lugar favorito." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img6.jpeg" alt="Memory 6" data-caption="As risadas mais sinceras que dividimos logo no início." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img7.jpeg" alt="Memory 7" data-caption="O abraço que me acolheu e me fez sentir em paz." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img8.jpeg" alt="Memory 8" data-caption="Um olhar que disse tudo antes mesmo das palavras." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img9.jpeg" alt="Memory 9" data-caption="A certeza começando a nascer no meu peito." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute left-6 md:left-1/2 -translate-x-1/2 top-1.5 md:top-auto w-6 h-6 md:w-8 md:h-8 bg-paper border-4 border-rio-red rounded-full flex items-center justify-center z-10 shadow-md"></div>
+                <div class="hidden md:block w-full md:w-[46%]"></div>
+            </div>
+
+            <!-- Chapter 2 -->
+            <div class="relative z-10 flex flex-col md:flex-row-reverse justify-between items-center mb-16 md:mb-24 reveal-on-scroll">
+                <div class="w-full md:w-[46%] pl-10 md:pl-10 md:text-left">
+                    <h4 class="font-playfair text-2xl font-bold text-charcoal mb-1">Chapter 2: Connection</h4>
+                    <p class="font-vibes text-rio-red text-xl mb-4">Discovering the World Together</p>
+                    <div class="bg-white p-2.5 sm:p-3 shadow-xl border border-charcoal/5 md:rotate-[1.5deg] transition duration-500 hover:rotate-0 rounded-sm">
+                        <div class="grid grid-cols-3 gap-1.5 sm:gap-2">
+                            <img src="img10.jpeg" alt="Memory 10" data-caption="Explorando novos lugares de mãos dadas." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img11.jpeg" alt="Memory 11" data-caption="Tudo ganha mais cor quando você está ao meu lado." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img12.jpeg" alt="Memory 12" data-caption="Nossa conexão que parece vir de outras vidas." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img13.jpeg" alt="Memory 13" data-caption="Cada detalhe seu me encantando cada vez mais." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img14.jpeg" alt="Memory 14" data-caption="Um café compartilhado, um silêncio confortável." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img15.jpeg" alt="Memory 15" data-caption="As fotos espontâneas que capturam nossa verdade." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img16.jpeg" alt="Memory 16" data-caption="Cumplicidade em cada passo dessa jornada." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img17.jpeg" alt="Memory 17" data-caption="Você se tornando meu lar mais doce e seguro." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img18.jpeg" alt="Memory 18" data-caption="Momentos simples que valem como tesouros eternos." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute left-6 md:left-1/2 -translate-x-1/2 top-1.5 md:top-auto w-6 h-6 md:w-8 md:h-8 bg-rio-red rounded-full z-10 shadow-md border-2 border-white"></div>
+                <div class="hidden md:block w-full md:w-[46%]"></div>
+            </div>
+
+            <!-- Chapter 3 -->
+            <div class="relative z-10 flex flex-col md:flex-row justify-between items-center mb-16 md:mb-24 reveal-on-scroll">
+                <div class="w-full md:w-[46%] pl-10 md:pl-0 md:text-right md:pr-10">
+                    <h4 class="font-playfair text-2xl font-bold text-charcoal mb-1">Chapter 3: Routine & Serenity</h4>
+                    <p class="font-vibes text-rio-red text-xl mb-4">The Beauty of Every Day</p>
+                    <div class="bg-white p-2.5 sm:p-3 shadow-xl border border-charcoal/5 md:rotate-[-1.5deg] transition duration-500 hover:rotate-0 rounded-sm">
+                        <div class="grid grid-cols-3 gap-1.5 sm:gap-2">
+                            <img src="img19.jpeg" alt="Memory 19" data-caption="A beleza de acordar e saber que temos um ao outro." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img20.jpeg" alt="Memory 20" data-caption="Nossas manhas preguiçosas cheias de carinho." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img21.jpeg" alt="Memory 21" data-caption="O jeito que você ilumina até os dias mais nublados." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img22.jpeg" alt="Memory 22" data-caption="Piadas internas que só a gente consegue entender." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img23.jpeg" alt="Memory 23" data-caption="Aconchego, paz e o calor da sua companhia." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img24.jpeg" alt="Memory 24" data-caption="Dividir a vida com você torna cada segundo especial." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img25.jpeg" alt="Memory 25" data-caption="Cuidando um do outro em cada pequeno detalhe." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img26.jpeg" alt="Memory 26" data-caption="Nossa sintonia natural que dispensa ensaios." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img27.jpeg" alt="Memory 27" data-caption="Construindo memórias tijolo por tijolo de afeto." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute left-6 md:left-1/2 -translate-x-1/2 top-1.5 md:top-auto w-6 h-6 md:w-8 md:h-8 bg-paper border-4 border-rio-red rounded-full flex items-center justify-center z-10 shadow-md"></div>
+                <div class="hidden md:block w-full md:w-[46%]"></div>
+            </div>
+
+            <!-- Chapter 4 -->
+            <div class="relative z-10 flex flex-col md:flex-row-reverse justify-between items-center mb-10 reveal-on-scroll">
+                <div class="w-full md:w-[46%] pl-10 md:pl-10 md:text-left">
+                    <h4 class="font-playfair text-2xl font-bold text-charcoal mb-1">Chapter 4: Now & Forever</h4>
+                    <p class="font-vibes text-rio-red text-xl mb-4">A Whole Year of Us</p>
+                    <div class="bg-white p-2.5 sm:p-3 shadow-xl border border-charcoal/5 md:rotate-[1.5deg] transition duration-500 hover:rotate-0 rounded-sm">
+                        <!-- Calendário -->
+                        <div class="relative bg-vintage-cream/30 p-3 sm:p-4 border border-charcoal/10 mb-3 rounded-sm text-center">
+                            <h5 class="font-vibes text-2xl sm:text-3xl mb-1.5 text-charcoal">Our Month</h5>
+                            <div class="grid grid-cols-7 gap-1 text-[10px] font-playfair font-bold mb-1 text-charcoal/50">
+                                <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+                            </div>
+                            <div class="grid grid-cols-7 gap-1 text-xs sm:text-sm font-playfair mb-1.5">
+                                <span class="text-transparent">0</span><span class="text-transparent">0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+                                <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span>
+                                <span class="relative z-10 font-bold text-rio-red">13
+                                    <svg class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-7 h-7 text-rio-red -z-10 opacity-40 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                                </span>
+                                <span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span>
+                                <span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span>
+                            </div>
+                            <p class="font-playfair text-[9px] sm:text-[10px] uppercase tracking-widest text-charcoal/60 mt-1 border-t border-charcoal/10 pt-1.5">1 Year of Love</p>
+                        </div>
+                        
+                        <!-- Fotos Finais -->
+                        <div class="grid grid-cols-3 gap-1.5 sm:gap-2">
+                            <img src="img28.jpeg" alt="Memory 28" data-caption="Um ano que passou como um sopro, cheio de histórias." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img29.jpeg" alt="Memory 29" data-caption="Olhando para trás e amando cada passo que demos." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img30.jpeg" alt="Memory 30" data-caption="Você foi o melhor presente que esse ano me deu." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img31.jpeg" alt="Memory 31" data-caption="O amor amadurece, mas o brilho no olhar permanece." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img32.jpeg" alt="Memory 32" data-caption="Promessas silenciosas que cumprimos com carinho." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img33.jpeg" alt="Memory 33" data-caption="365 dias que foram só o nosso ponto de partida." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img34.jpeg" alt="Memory 34" data-caption="O coração bate forte igual ao primeiro dia." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img35.jpeg" alt="Memory 35" data-caption="Nós dois contra o mundo, hoje e sempre." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                            <img src="img36.jpeg" alt="Memory 36" data-caption="Ao infinito e além com você, meu eterno amor." loading="lazy" class="gallery-photo w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500 rounded-sm cursor-pointer hover:scale-[1.02]">
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute left-6 md:left-1/2 -translate-x-1/2 top-1.5 md:top-auto w-8 h-8 md:w-12 md:h-12 bg-rio-red text-white rounded-full flex items-center justify-center z-10 shadow-lg">
+                    <svg class="w-4 h-4 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path></svg>
+                </div>
+                <div class="hidden md:block w-full md:w-[46%]"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal / Popup Lightbox com Animação -->
+    <div id="photo-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-charcoal/85 backdrop-blur-md modal-closed">
+        <!-- Card Estilo Polaroid -->
+        <div id="modal-card" class="relative bg-paper border border-vintage-cream/60 p-4 sm:p-6 rounded-xl shadow-2xl max-w-lg w-full flex flex-col items-center">
+            
+            <!-- Botão Fechar -->
+            <button id="modal-close-btn" class="absolute -top-3.5 -right-3.5 sm:-top-4 sm:-right-4 w-9 h-9 sm:w-10 sm:h-10 bg-rio-red text-white rounded-full flex items-center justify-center shadow-lg hover:bg-charcoal active:scale-95 transition-all text-sm focus:outline-none" aria-label="Close modal">
+                ✕
+            </button>
+
+            <!-- Foto Expandida -->
+            <div class="w-full bg-[#111] rounded-lg overflow-hidden shadow-inner flex items-center justify-center max-h-[62vh]">
+                <img id="modal-img" src="" alt="Expanded Memory" class="w-full h-full object-contain max-h-[62vh] select-none">
+            </div>
+
+            <!-- Frase e Rodapé da Foto -->
+            <div class="w-full mt-4 sm:mt-5 text-center px-2">
+                <div class="flex items-center justify-center gap-2 mb-2">
+                    <span class="h-px w-6 bg-rio-red/30"></span>
+                    <span id="modal-badge" class="font-playfair text-[10px] uppercase tracking-[0.25em] text-rio-red/70 font-semibold">Moment</span>
+                    <span class="h-px w-6 bg-rio-red/30"></span>
+                </div>
+                <p id="modal-caption" class="font-vibes text-2xl sm:text-3xl text-rio-red leading-snug drop-shadow-sm min-h-[2.5rem]"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Final Video Section -->
+    <section id="video" class="py-16 md:py-24 px-4 bg-charcoal relative overflow-hidden">
+        <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 20px 20px;"></div>
+        
+        <div class="max-w-4xl mx-auto text-center relative z-10 reveal-on-scroll">
+            <h3 class="font-playfair text-3xl md:text-5xl font-bold mb-3 text-paper">Our Movie</h3>
+            <p class="font-vibes text-2xl md:text-3xl text-rio-red mb-10">Press play on our story</p>
+
+            <div class="relative bg-[#111] p-2 sm:p-4 md:p-6 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] border border-gray-800">
+                <div class="hidden sm:block absolute -top-3 left-1/2 -translate-x-1/2 w-[103%] h-5 bg-gray-900 rounded-full border-b border-gray-700 shadow-xl z-20"></div>
+                
+                <div class="aspect-video bg-black relative rounded-lg overflow-hidden border-2 sm:border-4 border-gray-900 shadow-inner">
+                    <video class="w-full h-full object-cover" controls playsinline preload="metadata" poster="img36.jpeg">
+                        <source src="1011 (1).mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+            
+            <p class="font-playfair text-paper/60 text-xs sm:text-sm mt-8 uppercase tracking-[0.3em]">Directed by & Starring: Us</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-paper py-12 text-center border-t border-vintage-cream relative">
+        <div class="flex justify-center items-center gap-4 mb-4">
+            <div class="h-px w-10 sm:w-16 bg-charcoal/20"></div>
+            <svg class="w-5 h-5 text-rio-red animate-pulse" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path></svg>
+            <div class="h-px w-10 sm:w-16 bg-charcoal/20"></div>
+        </div>
+        <p class="font-playfair text-charcoal font-bold tracking-widest uppercase text-xs sm:text-sm">Happy 1st Anniversary</p>
+        <p class="font-vibes text-rio-red text-2xl sm:text-3xl mt-1">To the first of many</p>
+    </footer>
+
+    <!-- Scripts de Interação, Áudio e Modal -->
+    <script>
+        // 1. Áudio Player & Vinil
+        const audio = document.getElementById('audio-player');
+        const playBtn = document.getElementById('btn-play');
+        const iconPlay = document.getElementById('icon-play');
+        const iconPause = document.getElementById('icon-pause');
+        const prevBtn = document.getElementById('btn-prev');
+        const nextBtn = document.getElementById('btn-next');
+        const vinylDisc = document.getElementById('vinyl-disc');
+        const progressBar = document.getElementById('progress-bar');
+        const progressContainer = document.getElementById('progress-container');
+        const currentTimeEl = document.getElementById('current-time');
+        const totalDurationEl = document.getElementById('total-duration');
+        const currentTitleEl = document.getElementById('current-title');
+        const currentArtistEl = document.getElementById('current-artist');
+        const trackItems = Array.from(document.querySelectorAll('.track-item'));
+
+        let currentTrackIndex = 0;
+
+        function formatTime(seconds) {
+            if (isNaN(seconds) || seconds < 0) return "0:00";
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        function loadTrack(index) {
+            currentTrackIndex = index;
+            const track = trackItems[index];
+            const src = track.getAttribute('data-src');
+            const title = track.getAttribute('data-title');
+            const artist = track.getAttribute('data-artist');
+
+            audio.src = src;
+            currentTitleEl.textContent = title;
+            currentArtistEl.textContent = artist;
+
+            trackItems.forEach((item, idx) => {
+                const numberEl = item.querySelector('.track-number');
+                if (idx === index) {
+                    item.classList.add('bg-white/80', 'shadow-sm', 'border-l-4', 'border-rio-red', 'pl-3');
+                    if (numberEl) numberEl.innerHTML = '&#9658;';
+                } else {
+                    item.classList.remove('bg-white/80', 'shadow-sm', 'border-l-4', 'border-rio-red', 'pl-3');
+                    if (numberEl) numberEl.textContent = (idx + 1).toString().padStart(2, '0');
+                }
+            });
+        }
+
+        function playAudio() {
+            audio.play().then(() => {
+                iconPlay.classList.add('hidden');
+                iconPause.classList.remove('hidden');
+                vinylDisc.classList.remove('paused-spin');
+            }).catch(err => {
+                console.log("Autoplay waiting for user interaction:", err);
+            });
+        }
+
+        function pauseAudio() {
+            audio.pause();
+            iconPlay.classList.remove('hidden');
+            iconPause.classList.add('hidden');
+            vinylDisc.classList.add('paused-spin');
+        }
+
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                if (!audio.src) {
+                    loadTrack(0);
+                }
+                playAudio();
+            } else {
+                pauseAudio();
+            }
+        });
+
+        vinylDisc.addEventListener('click', () => {
+            playBtn.click();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentTrackIndex = (currentTrackIndex - 1 + trackItems.length) % trackItems.length;
+            loadTrack(currentTrackIndex);
+            playAudio();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentTrackIndex = (currentTrackIndex + 1) % trackItems.length;
+            loadTrack(currentTrackIndex);
+            playAudio();
+        });
+
+        trackItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                loadTrack(index);
+                playAudio();
+            });
+        });
+
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) {
+                const percent = (audio.currentTime / audio.duration) * 100;
+                progressBar.style.width = `${percent}%`;
+                currentTimeEl.textContent = formatTime(audio.currentTime);
+                const remaining = audio.duration - audio.currentTime;
+                totalDurationEl.textContent = `-${formatTime(remaining)}`;
+            }
+        });
+
+        progressContainer.addEventListener('click', (e) => {
+            const rect = progressContainer.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const width = rect.width;
+            if (audio.duration) {
+                audio.currentTime = (clickX / width) * audio.duration;
+            }
+        });
+
+        audio.addEventListener('ended', () => {
+            nextBtn.click();
+        });
+
+        loadTrack(0);
+
+        // 2. Animação de Scroll Reveal (Intersection Observer)
+        const revealElements = document.querySelectorAll('.reveal-on-scroll');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // 3. Sistema de Modal / Popup com Frase Personalizada
+        const modal = document.getElementById('photo-modal');
+        const modalCard = document.getElementById('modal-card');
+        const modalImg = document.getElementById('modal-img');
+        const modalCaption = document.getElementById('modal-caption');
+        const modalBadge = document.getElementById('modal-badge');
+        const modalCloseBtn = document.getElementById('modal-close-btn');
+        const photoElements = document.querySelectorAll('.gallery-photo');
+
+        function openModal(imgSrc, captionText, photoNumber) {
+            modalImg.src = imgSrc;
+            modalCaption.textContent = captionText || "Nosso momento especial.";
+            modalBadge.textContent = photoNumber ? `Moment #${photoNumber}` : 'Moment';
+            
+            modal.classList.remove('modal-closed');
+            modal.classList.add('modal-open');
+            document.body.classList.add('overflow-hidden'); // Trava o scroll da página de fundo
+        }
+
+        function closeModal() {
+            modal.classList.remove('modal-open');
+            modal.classList.add('modal-closed');
+            document.body.classList.remove('overflow-hidden');
+            setTimeout(() => {
+                modalImg.src = '';
+            }, 300);
+        }
+
+        photoElements.forEach((photo, index) => {
+            photo.addEventListener('click', () => {
+                const src = photo.getAttribute('src');
+                const caption = photo.getAttribute('data-caption') || photo.getAttribute('alt');
+                openModal(src, caption, index + 1);
+            });
+        });
+
+        modalCloseBtn.addEventListener('click', closeModal);
+
+        // Fecha ao clicar fora do cartão
+        modal.addEventListener('click', (e) => {
+            if (!modalCard.contains(e.target)) {
+                closeModal();
+            }
+        });
+
+        // Fecha ao pressionar ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('modal-open')) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
